@@ -1,0 +1,15 @@
+--data_file_path C:\Users\varun.bhoj\Downloads\MemberComments_Q1_FY21_GER_CS.csv
+--data_dir_path C:\Users\varun.bhoj\Desktop\Bertfiles
+--model_path C:\Users\varun.bhoj\Desktop\mlflow_bertopic\model2.bertopic
+--retrain_new_data True
+--retrain_old_model False
+--n_neighbors 17
+--n_components 19
+--min_dist 0.0
+--umap_metric cosine
+--min_cluster_size 10
+--hdbscan_metric euclidean
+--cluster_selection_method eom
+--prediction_data True
+--reduce_frequent_words True
+--diversity 0.5

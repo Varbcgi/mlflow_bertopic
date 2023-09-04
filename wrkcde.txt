@@ -1,0 +1,35 @@
+ '''
+    # File Arguments
+    parser = argparse.ArgumentParser(fromfile_prefix_chars='@')
+
+    parser = ArgumentParser()
+    parser.add_argument('--file_path',default=r".")
+    parser.add_argument('--model_path', default=r".")
+    params = parser.parse_args()
+
+    params.file_path = r"C:\Users\varun.bhoj\Downloads\MemberComments_Total_GERCS.csv"
+    params.model_path = r"C:\Users\varun.bhoj\Desktop\mlflow_bertopic\model.bertopic"
+    # Pipeline initiation
+    topic_model = init_pipeline(params.file_path)
+    topic_model.save(params.model_path)
+
+    # MLFlow Pipeline setup
+    mlflow.set_tracking_uri("http://127.0.0.1:5000")  # Replace with your MLflow server URI
+    current_datetime = datetime.now().strftime("%Y%m%d_%H%M%S")
+    experiment_name = "BERTopic_model_" + current_datetime
+    mlflow.set_experiment(experiment_name)
+
+    # Start an MLflow experiment
+    run_name = "run_" + current_datetime
+    with mlflow.start_run(run_name=run_name) as run:
+
+        # Log dataset
+        mlflow.log_artifact(params.file_path)
+
+        #Log hyperparameters
+
+
+        # Log  Model
+        mlflow.pyfunc.log_model("model",
+                                python_model=Bert_model()
+                                )
